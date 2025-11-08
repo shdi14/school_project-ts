@@ -6,6 +6,7 @@ let midX = scene.screenWidth() / 2
 let midY = scene.screenHeight() / 2 
 let X = midX
 let Y = midY
+let acseleration = 0
 //Создание карты
 tiles.setCurrentTilemap(tilemap`уровень1`)
 scene.setBackgroundImage(img`
@@ -158,4 +159,11 @@ game.onUpdateInterval(500, function() {
         }
     }
     
+})
+controller.up.onEvent(ControllerButtonEvent.Pressed, function() {
+    
+    if (acseleration = 1) {
+        
+        controller.moveSprite(mySprite ,55 ,50)
+    }
 })
