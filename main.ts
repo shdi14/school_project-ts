@@ -196,6 +196,10 @@ game.onUpdate(function() {
     
     isBottom = mySprite.isHittingTile(CollisionDirection.Bottom)
     if (isBottom) {
+       
+        if (controller.A.isPressed()) {
+            mySprite.vy = -50
+        }
         animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     }
     
@@ -227,6 +231,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
     mySprite.vy = -50
     animation.runImageAnimation(mySprite, flyAnimation, 300, true)
+    mySprite.vy = 0
 })
 
 

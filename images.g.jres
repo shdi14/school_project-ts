@@ -9,6 +9,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "gg"
     },
+    "image3": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAADQAAAAAN3dANAAAAAA3d0NDQAAAADQ0A0NAAAAAAAA3QAAAAAAAADdAAAAAAAAAN0AAAAAAADQ0A0AAAAA0NDQDQAAAAAN3Q3QAAAAANDdANAAAAAAAAAAAA0AAAAAAAAADQAAAAAAAADQAAAAAAAAANANAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
