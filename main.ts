@@ -1,6 +1,6 @@
 //Spawn mySprite
 let mySprite =sprites.create(assets.image`gg`, SpriteKind.Player)
-controller.moveSprite(mySprite, 40, 4)
+controller.moveSprite(mySprite, 55, 4)
 scene.cameraFollowSprite(mySprite)
 let midX = scene.screenWidth() / 2
 let midY = scene.screenHeight() / 2 
@@ -143,4 +143,19 @@ mySprite.setImage(assets.image`gg`)
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 let rotate = 1
 mySprite.setImage(assets.image`gg0`)
+})
+//Полёт!!
+game.onUpdateInterval(500, function() {
+    
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        if (controller.left.isPressed()) {
+
+            let acseleration: 1
+        }
+        if (controller.right.isPressed()) {
+
+            let acseleration: 1
+        }
+    }
+    
 })
