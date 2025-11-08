@@ -138,25 +138,9 @@ game.onUpdateInterval(40, function () {
 controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
  let rotate = 0
 
-mySprite.setImage(img`
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . .
-`)
+mySprite.setImage(assets.image`gg`)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 let rotate = 1
+mySprite.setImage(assets.image`gg0`)
 })

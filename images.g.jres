@@ -1,6 +1,11 @@
 {
-    "image1": {
+    "image2": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAAGBmBgAAAAAAYGZm//8AAABgZmYAAAAAAGBmZv//AAAAYGZmAAAAAABgZmYAAAAAAGBmZgAAAAAAYGZmAAAAAABgZmb//wAAAGBmZgAAABd/d2Zm//8A8H9/BwAAAABwd/cHAAAAAPB/fwcAAAAAF393AAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "gg0"
+    },
+    "image1": {
+        "data": "hwQQABAAAAAAF393AAAAAADwf38HAAAAAHB39wcAAAAA8H9/BwAAAAAXf3dmZv//AAAAYGZmAAAAAABgZmb//wAAAGBmZgAAAAAAYGZmAAAAAABgZmYAAAAAAGBmZgAAAAAAYGZm//8AAABgZmYAAAAAAGBmZv//AAAAYGYGAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "gg"
     },
