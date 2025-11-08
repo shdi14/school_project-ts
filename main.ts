@@ -1,4 +1,5 @@
 //Spawn mySprite
+info.setLife(5)
 let mySprite =sprites.create(assets.image`gg0`, SpriteKind.Player)
 controller.moveSprite(mySprite, 55, 0)
 scene.cameraFollowSprite(mySprite)
@@ -6,6 +7,7 @@ let midX = scene.screenWidth() / 2
 let midY = scene.screenHeight() / 2 
 let X = midX
 let Y = midY
+let room = 1
 mySprite.ay = 26
 let isBottom = true
 let isRight = true
@@ -198,7 +200,7 @@ game.onUpdate(function() {
     if (isBottom) {
        
         if (controller.A.isPressed()) {
-            mySprite.vy = -50
+            mySprite.vy = -55
         }
         animation.stopAnimation(animation.AnimationTypes.All, mySprite)
     }
@@ -228,10 +230,62 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(assets.image`gg0`)
 })
 
+//прыжок
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
-    mySprite.vy = -50
+    mySprite.vy = -55
     animation.runImageAnimation(mySprite, flyAnimation, 300, true)
     mySprite.vy = 0
 })
+//переход между комнатами
+scene.onOverlapTile(SpriteKind.Player, img`
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+    1 1 1 1 . . . . . . . . . . . .
+`, function (sprite: Sprite, location: tiles.Location) {
+
+    if (room = 1) {
+
+    }
+    tiles.setCurrentTilemap(tilemap`уровень2`)
+    room = 2
+    mySprite.setPosition(28*16, 23*16+8)
+})
+scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
+
+    if (room = 2) {
+tiles.setCurrentTilemap(tilemap`уровень1`)
+mySprite.setPosition(32, 232)
+    }
+    
+})
+if (tiles.tileAtLocationEquals(tiles.getTileLocation(mySprite.x, mySprite.y), assets.image`myImage1`) )
+    info.changeLifeBy(-1)
+    mySprite.x - 12
+
+if (tiles.tileAtLocationEquals(tiles.getTileLocation(mySprite.x, mySprite.y), assets.image`myImage0`)) {
+info.changeLifeBy(-1)
+mySprite.y - 12
+{
 
 
+
+}}
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+
+    info.changeLifeBy(3)
+
+    mySprite.startEffect(effects.spray)
+})
