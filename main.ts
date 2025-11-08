@@ -145,9 +145,6 @@ scene.setBackgroundImage(img`
 `)
 //Падение
 game.onUpdateInterval(40, function () {
-mySprite.setVelocity(0, 16)
-})
-controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
-    
-})
 
+
+})

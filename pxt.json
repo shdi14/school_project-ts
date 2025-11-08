@@ -2,7 +2,8 @@
     "name": "школа_проэкт TS!!!!",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "corgio": "*"
     },
     "files": [
         "main.blocks",
