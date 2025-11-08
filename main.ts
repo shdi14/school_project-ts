@@ -271,18 +271,20 @@ mySprite.setPosition(32, 232)
     }
     
 })
-if (tiles.tileAtLocationEquals(tiles.getTileLocation(mySprite.x, mySprite.y), assets.image`myImage1`) )
+scene.onOverlapTile(SpriteKind.Player, assets.image`image1`, function(sprite: Sprite, location: tiles.Location) {
+    
     info.changeLifeBy(-1)
-    mySprite.x - 12
-
-if (tiles.tileAtLocationEquals(tiles.getTileLocation(mySprite.x, mySprite.y), assets.image`myImage0`)) {
-info.changeLifeBy(-1)
-mySprite.y - 12
+    mySprite.y - 12
+})
+scene.onOverlapTile(SpriteKind.Player, assets.image`image`, function(sprite: Sprite, location: tiles.Location) {
+    info.changeLifeBy(-1)
+    mySprite.y - 12
+})
 {
 
 
 
-}}
+}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
     info.changeLifeBy(3)
