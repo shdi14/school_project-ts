@@ -1,22 +1,5 @@
 //Spawn mySprite
-let mySprite = sprites.create(img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . 7 . . . 7 
-    . . . . . . . . . . . 1 f 7 f 1 
-    . . . . . . . . . . . f f 7 f f 
-    . . . . . . . . . . . 7 7 7 7 7 
-    . . . . . . . . . . . 7 f 7 f 7 
-    . 6 6 6 6 6 6 6 6 6 6 7 7 f 7 7 
-    . 6 6 6 6 6 6 6 6 6 6 6 7 7 7 . 
-    . 6 6 6 6 6 6 6 6 6 6 6 . . . . 
-    . 6 6 6 6 6 6 6 6 6 6 6 . . . . 
-    . . 6 6 6 6 6 6 6 6 6 6 . . . . 
-    . . f . f . . . . f . f . . . . 
-    . . f . f . . . . f . f . . . . 
-    . . f . f . . . . f . f . . . . 
-    . . f . f . . . . f . f . . . . 
-    `, SpriteKind.Player)
+let mySprite =sprites.create(assets.image`gg`, SpriteKind.Player)
 controller.moveSprite(mySprite, 40, 4)
 scene.cameraFollowSprite(mySprite)
 let midX = scene.screenWidth() / 2
@@ -150,4 +133,30 @@ scene.setBackgroundImage(img`
 //Падение
 game.onUpdateInterval(40, function () {  
     mySprite.setPosition(mySprite.x, mySprite.y + 2)
+})
+//Поворот главного героя
+controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
+ let rotate = 0
+
+mySprite.setImage(img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . .
+`)
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+let rotate = 1
 })
