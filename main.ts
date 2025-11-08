@@ -19,6 +19,10 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 40, 4)
 scene.cameraFollowSprite(mySprite)
+let midX = scene.screenWidth() / 2
+let midY = scene.screenHeight() / 2 
+let X = midX
+let Y = midY
 //Создание карты
 tiles.setCurrentTilemap(tilemap`уровень1`)
 scene.setBackgroundImage(img`
@@ -144,7 +148,6 @@ scene.setBackgroundImage(img`
     9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
 `)
 //Падение
-game.onUpdateInterval(40, function () {
-
-
+game.onUpdateInterval(40, function () {  
+    mySprite.setPosition(mySprite.x, mySprite.y + 2)
 })
