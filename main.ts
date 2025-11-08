@@ -1,11 +1,14 @@
 //Spawn mySprite
-let mySprite =sprites.create(assets.image`gg`, SpriteKind.Player)
-controller.moveSprite(mySprite, 55, 4)
+let mySprite =sprites.create(assets.image`gg0`, SpriteKind.Player)
+controller.moveSprite(mySprite, 55, 0)
 scene.cameraFollowSprite(mySprite)
 let midX = scene.screenWidth() / 2
 let midY = scene.screenHeight() / 2 
 let X = midX
 let Y = midY
+mySprite.ay = 25
+let isBottom = true
+let isRight = true
 let acseleration = 0
 //Создание карты
 tiles.setCurrentTilemap(tilemap`уровень1`)
@@ -131,39 +134,99 @@ scene.setBackgroundImage(img`
     9999779999997777777777777777777777999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999997999999
     9999777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777999999
 `)
+let flyAnimation = [
+    img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 . . . 7
+        . . a a . . . . . . . 1 f 7 f 1
+        . . a a a a . . . . . f f 7 f f
+        . . . a a a a a . . . 7 7 7 7 7
+        . . . . a a a a . . . 7 f 7 f 7
+        . 6 6 6 6 6 6 6 6 6 6 7 7 f 7 7
+        . 6 6 6 6 6 6 6 6 6 6 6 7 7 7 .
+        . 6 6 6 6 6 6 6 6 6 6 6 . . . .
+        . 6 6 6 6 6 6 6 6 6 6 6 . . . .
+        . . 6 6 6 6 6 6 6 6 6 6 . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+    `,
+    img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 . . . 7
+        . . . . . . . . . . . 1 f 7 f 1
+        . . . . . . . . . . . f f 7 f f
+        . . a a a a a a . . . 7 7 7 7 7
+        . a a a a a a a . . . 7 f 7 f 7
+        . 6 6 a a a a 6 6 6 6 7 7 f 7 7
+        . 6 6 6 6 6 6 6 6 6 6 6 7 7 7 .
+        . 6 6 6 6 6 6 6 6 6 6 6 . . . .
+        . 6 6 6 6 6 6 6 6 6 6 6 . . . .
+        . . 6 6 6 6 6 6 6 6 6 6 . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+    `,
+    img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . 7 . . . 7
+        . . . . . . . . . . . 1 f 7 f 1
+        . . . . . . . . . . . f f 7 f f
+        . . . . . . . a a . . 7 7 7 7 7
+        . . . . . a a a a . . 7 f 7 f 7
+        . 6 6 6 a a a a 6 6 6 7 7 f 7 7
+        . 6 a a a a a 6 6 6 6 6 7 7 7 .
+        . 6 a a a a 6 6 6 6 6 6 . . . .
+        . 6 6 a 6 6 6 6 6 6 6 6 . . . .
+        . . 6 6 6 6 6 6 6 6 6 6 . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+        . . f . f . . . . f . f . . . .
+    `,
+]
+
+
+game.onUpdate(function() {
+    
+    isBottom = mySprite.isHittingTile(CollisionDirection.Bottom)
+    if (isBottom) {
+        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
+    }
+    
+})
 //Падение
 game.onUpdateInterval(40, function () {  
-    mySprite.setPosition(mySprite.x, mySprite.y + 2)
+    //mySprite.setPosition(mySprite.x, mySprite.y + 2)
 })
 //Поворот главного героя
 controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
- let rotate = 0
-
-mySprite.setImage(assets.image`gg`)
+    if (isRight == true) {
+        for (let image of flyAnimation) {
+            image.flipX()
+        }
+    }
+    isRight = false
+    mySprite.setImage(assets.image`gg`)
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-let rotate = 1
-mySprite.setImage(assets.image`gg0`)
-})
-//Полёт!!
-game.onUpdateInterval(500, function() {
-    
-    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
-        if (controller.left.isPressed()) {
-
-            let acseleration: 1
-        }
-        if (controller.right.isPressed()) {
-
-            let acseleration: 1
+    if (isRight == false) {
+        for (let image of flyAnimation) {
+            image.flipX()
         }
     }
-    
+    isRight = true
+    mySprite.setImage(assets.image`gg0`)
 })
-controller.up.onEvent(ControllerButtonEvent.Pressed, function() {
-    
-    if (acseleration = 1) {
-        
-        controller.moveSprite(mySprite ,55 ,50)
-    }
+
+controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
+    mySprite.vy = -50
+    animation.runImageAnimation(mySprite, flyAnimation, 300, true)
 })
+
+
