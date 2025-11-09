@@ -9,6 +9,7 @@ let X = midX
 let Y = midY
 let room = 1
 mySprite.ay = 26
+let timer1 = 0
 let isBottom = true
 let isRight = true
 let acseleration = 0
@@ -273,13 +274,21 @@ mySprite.setPosition(32, 232)
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
     
-    info.changeLifeBy(-1)
-    mySprite.y - 12
-    pause (100)
+    if (timer1 = 0) {
+        info.changeLifeBy(-1)
+        mySprite.y - 12
+        timer1 = 1
+
+        timer.throttle("action", 500, function() {
+        timer1 = 0
+        })
+    }
+    
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function(sprite: Sprite, location: tiles.Location) {
     info.changeLifeBy(-1)
-    mySprite.y - 12
+    mySprite.y -12
+    
 })
 {
 
