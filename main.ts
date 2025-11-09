@@ -274,19 +274,15 @@ mySprite.setPosition(32, 232)
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
     
-    if (timer1 = 0) {
+    tiles.setTileAt(tiles.getTileLocation(mySprite.x, mySprite.y), assets.image`myImage`)
         info.changeLifeBy(-1)
-        mySprite.y - 12
-        timer1 = 0
         
-        timer.after(500, function() {
-        timer1 = 1
-        })
+        
         
         
                        
     
-}
+
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function(sprite: Sprite, location: tiles.Location) {
     info.changeLifeBy(-1)
     mySprite.y -12
