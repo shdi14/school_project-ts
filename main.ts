@@ -274,16 +274,19 @@ mySprite.setPosition(32, 232)
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
     
-    if (timer1 = 1) {
+    if (timer1 = 0) {
         info.changeLifeBy(-1)
         mySprite.y - 12
         timer1 = 0
-        timer.throttle("action", 0, function() {
+        
+        timer.after(500, function() {
         timer1 = 1
         })
-                       }
+        
+        
+                       
     
-})
+}
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function(sprite: Sprite, location: tiles.Location) {
     info.changeLifeBy(-1)
     mySprite.y -12
@@ -299,4 +302,4 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     info.changeLifeBy(3)
 
     mySprite.startEffect(effects.spray)
-})
+})})
