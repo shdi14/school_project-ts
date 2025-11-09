@@ -275,6 +275,7 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: S
     
     info.changeLifeBy(-1)
     mySprite.y - 12
+    pause (100)
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function(sprite: Sprite, location: tiles.Location) {
     info.changeLifeBy(-1)
