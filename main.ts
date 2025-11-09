@@ -271,12 +271,12 @@ mySprite.setPosition(32, 232)
     }
     
 })
-scene.onOverlapTile(SpriteKind.Player, assets.image`image1`, function(sprite: Sprite, location: tiles.Location) {
+scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
     
     info.changeLifeBy(-1)
     mySprite.y - 12
 })
-scene.onOverlapTile(SpriteKind.Player, assets.image`image`, function(sprite: Sprite, location: tiles.Location) {
+scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function(sprite: Sprite, location: tiles.Location) {
     info.changeLifeBy(-1)
     mySprite.y - 12
 })
