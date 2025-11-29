@@ -8,9 +8,10 @@ let midY = scene.screenHeight() / 2
 let X = midX
 let Y = midY
 let room = 1
-mySprite.ay = 26
+let acceleration = 26
+mySprite.ay = acceleration
 let timer1 = 0
-let heal = 1
+let isHealing = false
 let isBottom = true
 let isRight = true
 let acseleration = 0
@@ -236,7 +237,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
     mySprite.vy = -55
     animation.runImageAnimation(mySprite, flyAnimation, 300, true)
-    mySprite.vy = 0
+    //mySprite.vy = 0
 })
 //переход между комнатами
 scene.onOverlapTile(SpriteKind.Player, img`
@@ -310,20 +311,25 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: S
 
 })
 //heal
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    
-    if (heal = 1) {
-        heal = 0
-        
+function heal() {
+    if (isHealing == false) {
+        isHealing = true
         mySprite.startEffect(effects.hearts)
-        timer.throttle("action", 5000, function() {
-            heal = 1   
+        mySprite.ay = 0
+        mySprite.vy = 0
+        timer.after(1000, function () {
             info.changeLifeBy(3)
             effects.clearParticles(mySprite)
+            timer.after(1000, function () {
+                mySprite.ay = acceleration
+                isHealing = false
+            })
         })
     }
     
-
+}
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {    
+    heal()
 })
 //монета
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage3`, function(sprite: Sprite, location: tiles.Location) {
