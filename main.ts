@@ -292,6 +292,23 @@ tiles.setCurrentTilemap(tilemap`уровень1`)
     
     
     })
+//пила
+scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: Sprite, location: tiles.Location) {
+
+    if (timer1 = 1) {
+        info.changeLifeBy(-1)
+        timer1 = 2
+        timer.throttle("action", 10, function () {
+            timer1 = 1
+            mySprite.y = mySprite.y - 16
+
+
+        })
+    }
+
+
+})
+
 //heal
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
