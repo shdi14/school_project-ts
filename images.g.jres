@@ -34,6 +34,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "myImage3"
     },
+    "image8": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAPAAAAAAAA8P0AAAAAAP///////wDw/d3d3d39AAD//d/d3f0A8P39393d/QAA/93d3d39APD93d3d3f0AAP/d3d3d/QDw/d3d3d39AAD/3d3d3f0A8P3d3d3d/QAA////////AAAAAAAA8P0AAAAAAAAADw==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "reb"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

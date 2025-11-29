@@ -1,6 +1,7 @@
 //Spawn mySprite
 info.setLife(5)
 let mySprite =sprites.create(assets.image`gg0`, SpriteKind.Player)
+let mySprite2: Sprite
 controller.moveSprite(mySprite, 55, 0)
 scene.cameraFollowSprite(mySprite)
 let midX = scene.screenWidth() / 2
@@ -209,10 +210,7 @@ game.onUpdate(function() {
     }
     
 })
-//Падение
-game.onUpdateInterval(40, function () {  
-    //mySprite.setPosition(mySprite.x, mySprite.y + 2)
-})
+
 //Поворот главного героя
 controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
     if (isRight == true) {
@@ -237,7 +235,7 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
     mySprite.vy = -55
     animation.runImageAnimation(mySprite, flyAnimation, 300, true)
-    //mySprite.vy = 0
+    mySprite.vy = 0
 })
 //переход между комнатами
 scene.onOverlapTile(SpriteKind.Player, img`
@@ -265,7 +263,21 @@ scene.onOverlapTile(SpriteKind.Player, img`
     tiles.setCurrentTilemap(tilemap`уровень2`)
     room = 2
     mySprite.setPosition(28*16, mySprite.y+9*16)
+    mySprite2 = sprites.create(assets.image`reb`, SpriteKind.Player)
+    mySprite2.setPosition(16 * 10, 16 * 20 - 8)
+    
 })
+//Падение
+game.onUpdateInterval(40, function () {
+
+    if (room !== 1) {
+        mySprite2.x
+    }
+
+
+})
+
+
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
 
     if (room = 2) {
@@ -314,7 +326,7 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: S
 function heal() {
     if (isHealing == false) {
         isHealing = true
-        mySprite.startEffect(effects.hearts)
+        mySprite.startEffect(effects.fire)
         mySprite.ay = 0
         mySprite.vy = 0
         timer.after(1000, function () {
@@ -323,6 +335,7 @@ function heal() {
             timer.after(1000, function () {
                 mySprite.ay = acceleration
                 isHealing = false
+                music.stopAllSounds()
             })
         })
     }
