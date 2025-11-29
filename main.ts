@@ -300,7 +300,7 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: S
         timer1 = 2
         timer.throttle("action", 10, function () {
             timer1 = 1
-            mySprite.y = mySprite.y - 16
+            mySprite.y = mySprite.y -8
 
 
         })
@@ -308,7 +308,6 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: S
 
 
 })
-
 //heal
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
