@@ -142,15 +142,15 @@ let flyAnimation = [
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
-        . . a a . . . . . . . 7 . . 7 .
-        . . a a a a . . . . . f 7 7 f .
-        . . . a a a a a . . . 7 7 7 7 .
-        . . . . a a a a . . . f 7 7 f .
+        . . a a . . . . . . . . . . . .
+        . . a a a a . . . . . 7 . . 7 .
+        . . . a a a a a . . . f 7 7 f .
+        . . . . a a a a . . . 7 7 7 7 .
+        . 6 6 6 6 6 6 6 6 6 6 f 7 7 f .
         . 6 6 6 6 6 6 6 6 6 6 7 f f 7 .
         . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 .
         . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
         . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
-        . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
         . . f . f . . . . f . f . . . .
         . . f . f . . . . f . f . . . .
         . . f . f . . . . f . f . . . .
@@ -160,15 +160,15 @@ let flyAnimation = [
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
         . . . . . . . . . . . 7 . . 7 .
-        . . . . . . . . . . . f 7 7 f .
-        . . a a a a a a . . . 7 7 7 7 .
-        . a a a a a a a . . . f 7 7 f .
-        . 6 6 a a a a 6 6 6 6 7 f f 7 .
+        . . a a a a a a . . . f 7 7 f .
+        . a a a a a a a . . . 7 7 7 7 .
+        . 6 6 a a a a 6 6 6 6 f 7 7 f .
+        . 6 6 6 6 6 6 6 6 6 6 7 f f 7 .
         . 6 6 6 6 6 6 6 6 6 6 7 7 7 7 .
         . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
         . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
-        . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
         . . f . f . . . . f . f . . . .
         . . f . f . . . . f . f . . . .
         . . f . f . . . . f . f . . . .
@@ -178,13 +178,13 @@ let flyAnimation = [
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
         . . . . . . . . . . . 7 . . 7 .
-        . . . . . . . . . . . f 7 7 f .
-        . . . . . . . a a . . 7 7 7 7 .
-        . . . . . a a a a . . f 7 7 f .
-        . 6 6 6 a a a a 6 6 6 7 f f 7 .
-        . 6 a a a a a 6 6 6 6 7 7 7 7 .
-        . 6 a a a a 6 6 6 6 6 6 6 . . .
+        . . . . . . . a a . . f 7 7 f .
+        . . . . . a a a a . . 7 7 7 7 .
+        . 6 6 6 a a a a 6 6 6 f 7 7 f .
+        . 6 a a a a a 6 6 6 6 7 f f 7 .
+        . 6 a a a a 6 6 6 6 6 7 7 7 7 .
         . 6 6 a 6 6 6 6 6 6 6 6 6 . . .
         . 6 6 6 6 6 6 6 6 6 6 6 6 . . .
         . . f . f . . . . f . f . . . .
@@ -262,7 +262,7 @@ scene.onOverlapTile(SpriteKind.Player, img`
     }
     tiles.setCurrentTilemap(tilemap`уровень2`)
     room = 2
-    mySprite.setPosition(28*16, 23*16+8)
+    mySprite.setPosition(28*16, mySprite.y+9*16)
 })
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
 
@@ -272,6 +272,7 @@ mySprite.setPosition(32, 232)
     }
     
 })
+
 
         
         
@@ -296,5 +297,4 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 
     info.changeLifeBy(3)
 
-    mySprite.startEffect(effects.spray)
 })
