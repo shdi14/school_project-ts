@@ -29,6 +29,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "gg"
     },
+    "image7": {
+        "data": "hwQQABAAAAAAAFVVVQUAAABVREREVAUAUEREREREVABQRERERERUAEVERFRERUQFRUREVFRERAVFRERURUREBUVEVVVEREQFRUREVEVERAVFRERUVEREBUVERFRERUQFUEREREREVABQRERERERUAABVREREVAUAAABVVVUFAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "myImage3"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",

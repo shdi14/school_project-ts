@@ -10,6 +10,7 @@ let Y = midY
 let room = 1
 mySprite.ay = 26
 let timer1 = 0
+let heal = 1
 let isBottom = true
 let isRight = true
 let acseleration = 0
@@ -310,7 +311,22 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: S
 })
 //heal
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    
+    if (heal = 1) {
+        heal = 0
+        
+        mySprite.startEffect(effects.hearts)
+        timer.throttle("action", 5000, function() {
+            heal = 1   
+            info.changeLifeBy(3)
+            effects.clearParticles(mySprite)
+        })
+    }
+    
 
-    info.changeLifeBy(3)
-
+})
+//монета
+scene.onOverlapTile(SpriteKind.Player,assets.image`myImage3`, function(sprite: Sprite, location: tiles.Location) {
+    
+    game.gameOver(true)
 })
