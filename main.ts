@@ -268,7 +268,7 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: 
 
     if (room = 2) {
 tiles.setCurrentTilemap(tilemap`уровень1`)
-mySprite.setPosition(32, 232)
+        mySprite.setPosition(32, mySprite.y-16*9)
     }
     
 })
