@@ -354,8 +354,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
 
 
  
-if (isRight == true) {
-    let projectile = sprites.createProjectileFromSprite(img`
+if (isHealing == false) {
+    if (isRight == true) {
+        let projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . .
         . . . . . . . . 4 . . . . . . .
         . . . . . . . 4 2 4 . . . . . .
@@ -374,11 +375,11 @@ if (isRight == true) {
         . . . . . . . . . . . . . . . .
     `, null, 50, 50)
 
-    projectile.setPosition(mySprite.x, mySprite.y)
+        projectile.setPosition(mySprite.x, mySprite.y)
 
 
-} else {
-    let projectile = sprites.createProjectileFromSprite(img`
+    } else {
+        let projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . .
         . . . . . . . 4 . . . . . . . .
         . . . . . . 4 2 4 . . . . . . .
@@ -396,8 +397,10 @@ if (isRight == true) {
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     `, null, -50, 50)
-    projectile.setPosition(mySprite.x, mySprite.y)
+        projectile.setPosition(mySprite.x, mySprite.y)
 
 
+    }
 }
+
 })
