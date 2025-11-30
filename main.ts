@@ -9,6 +9,7 @@ let midY = scene.screenHeight() / 2
 let X = midX
 let Y = midY
 let room = 1
+let isRightcubird = true
 let acceleration = 26
 mySprite.ay = acceleration
 let timer1 = 0
@@ -278,11 +279,12 @@ game.onUpdateInterval(500, function() {
     if (room !== 1) {
         
         
-            if (mySprite2.x !== 16*8-8) {
+        if (mySprite2.x !== 16 * 8 - 8 ) {
+                
                 
                 mySprite2.x = mySprite2.x - 4
             } else {
-                mySprite2.x = mySprite2.x + 4
+                
             }      
     
 }
