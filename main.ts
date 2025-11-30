@@ -354,7 +354,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
 
 
  
-if (isRight = true) {
+if (isRight == true) {
     let projectile = sprites.createProjectileFromSprite(img`
         . . . . . . . . . . . . . . . .
         . . . . . . . . 4 . . . . . . .
@@ -373,6 +373,8 @@ if (isRight = true) {
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     `, null, 50, 50)
+
+    projectile.setPosition(mySprite.x, mySprite.y)
 
 
 } else {
@@ -394,5 +396,8 @@ if (isRight = true) {
         . . . . . . . . . . . . . . . .
         . . . . . . . . . . . . . . . .
     `, null, -50, 50)
+    projectile.setPosition(mySprite.x, mySprite.y)
+
+
 }
 })
