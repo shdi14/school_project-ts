@@ -349,3 +349,24 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage3`, function(sprite: S
     
     game.gameOver(true)
 })
+//бомбы
+controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
+ let projectile = sprites.createProjectileFromSprite(img`
+     . . . . . . . . . . . . . . . .
+     . . . . . . . . . . . . . . . .
+     . . . . . . . d . . . . . . . .
+     . . . . . . d d . . . . . . . .
+     . . . . . . d . . . . . . . . .
+     . . . . f f f f f . . . . . . .
+     . . . f f f f f f f . . . . . .
+     . . f f f f f f f f f . . . . .
+     . . f f f f f f f f f . . . . .
+     . . f f f f f f f f f . . . . .
+     . . f f f f f f f f f . . . . .
+     . . f f f f f f f f f . . . . .
+     . . . f f f f f f f . . . . . .
+     . . . . f f f f f . . . . . . .
+     . . . . . . . . . . . . . . . .
+     . . . . . . . . . . . . . . . .
+ `, null, 50, 50)
+})
