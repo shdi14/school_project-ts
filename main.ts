@@ -351,22 +351,48 @@ scene.onOverlapTile(SpriteKind.Player,assets.image`myImage3`, function(sprite: S
 })
 //бомбы
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
- let projectile = sprites.createProjectileFromSprite(img`
-     . . . . . . . . . . . . . . . .
-     . . . . . . . . . . . . . . . .
-     . . . . . . . d . . . . . . . .
-     . . . . . . d d . . . . . . . .
-     . . . . . . d . . . . . . . . .
-     . . . . f f f f f . . . . . . .
-     . . . f f f f f f f . . . . . .
-     . . f f f f f f f f f . . . . .
-     . . f f f f f f f f f . . . . .
-     . . f f f f f f f f f . . . . .
-     . . f f f f f f f f f . . . . .
-     . . f f f f f f f f f . . . . .
-     . . . f f f f f f f . . . . . .
-     . . . . f f f f f . . . . . . .
-     . . . . . . . . . . . . . . . .
-     . . . . . . . . . . . . . . . .
- `, null, 50, 50)
+
+
+ 
+if (isRight = true) {
+    let projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . 4 . . . . . . .
+        . . . . . . . 4 2 4 . . . . . .
+        . . . . . . . . 4 d . . . . . .
+        . . . . . . . . . d . . . . . .
+        . . . . . . . f f f f f . . . .
+        . . . . . . f f f f f f f . . .
+        . . . . . f f f f f f f f f . .
+        . . . . . f f f f f f f f f . .
+        . . . . . f f f f f f f f f . .
+        . . . . . f f f f f f f f f . .
+        . . . . . f f f f f f f f f . .
+        . . . . . . f f f f f f f . . .
+        . . . . . . . f f f f f . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `, null, 50, 50)
+
+
+} else {
+    let projectile = sprites.createProjectileFromSprite(img`
+        . . . . . . . . . . . . . . . .
+        . . . . . . . 4 . . . . . . . .
+        . . . . . . 4 2 4 . . . . . . .
+        . . . . . . d 4 . . . . . . . .
+        . . . . . . d . . . . . . . . .
+        . . . . f f f f f . . . . . . .
+        . . . f f f f f f f . . . . . .
+        . . f f f f f f f f f . . . . .
+        . . f f f f f f f f f . . . . .
+        . . f f f f f f f f f . . . . .
+        . . f f f f f f f f f . . . . .
+        . . f f f f f f f f f . . . . .
+        . . . f f f f f f f . . . . . .
+        . . . . f f f f f . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+    `, null, -50, 50)
+}
 })
