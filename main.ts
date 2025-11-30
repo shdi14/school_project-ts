@@ -270,12 +270,22 @@ scene.onOverlapTile(SpriteKind.Player, img`
 //Падение
 game.onUpdateInterval(40, function () {
 
-    if (room !== 1) {
-        mySprite2.x
-    }
+    
 
-
+//враг 1
 })
+game.onUpdateInterval(500, function() {
+    if (room !== 1) {
+        
+        
+            if (mySprite2.x !== 16*8-8) {
+                
+                mySprite2.x = mySprite2.x - 4
+            } else {
+                mySprite2.x = mySprite2.x + 4
+            }      
+    
+}
 
 
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
@@ -403,4 +413,4 @@ if (isHealing == false) {
     }
 }
 
-})
+})})
