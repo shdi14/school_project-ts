@@ -279,12 +279,12 @@ game.onUpdateInterval(500, function() {
     if (room !== 1) {
         
         
-        if (mySprite2.x !== 16 * 8 - 8 ) {
+        if (mySprite2.x !== 16 * 8 - 8 || mySprite2.x !== 16 * 11 - 8 ) {
                 
                 
-                mySprite2.x = mySprite2.x - 4
+            isRightcubird = true
             } else {
-                
+            isRightcubird = false  
             }      
     
 }
