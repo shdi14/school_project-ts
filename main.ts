@@ -1,7 +1,10 @@
 //Spawn mySprite
 info.setLife(5)
 let mySprite = sprites.create(assets.image`gg0`, SpriteKind.Player)
-let mySprite2: Sprite
+let cubird: Sprite
+let cubirdImg = assets.image`reb`
+let isRightCubird = false
+let isCubirdInit = false
 controller.moveSprite(mySprite, 55, 0)
 scene.cameraFollowSprite(mySprite)
 let midX = scene.screenWidth() / 2
@@ -9,7 +12,6 @@ let midY = scene.screenHeight() / 2
 let X = midX
 let Y = midY
 let room = 1
-let isRightcubird = true
 let acceleration = 26
 mySprite.ay = acceleration
 let timer1 = 0
@@ -200,18 +202,7 @@ let flyAnimation = [
 ]
 
 
-game.onUpdate(function() {
-    
-    isBottom = mySprite.isHittingTile(CollisionDirection.Bottom)
-    if (isBottom) {
-       
-        if (controller.A.isPressed()) {
-            mySprite.vy = -55
-        }
-        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
-    }
-    
-})
+
 
 //Поворот главного героя
 controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
@@ -264,21 +255,22 @@ scene.onOverlapTile(SpriteKind.Player,
         tiles.setCurrentTilemap(tilemap`уровень2`)
         room = 2
         mySprite.setPosition(28*16, mySprite.y)
-        mySprite2 = sprites.create(assets.image`reb`, SpriteKind.Enemy)
-        mySprite2.setPosition(16 * 10, 16 * 20 - 8)
-        mySprite2.follow(mySprite, 20, 1000)
+        cubird = sprites.create(cubirdImg, SpriteKind.Enemy)
+        cubird.setPosition(16 * 10, 16 * 20 - 8)
+        cubird.follow(mySprite, 20, 1000)
+        isCubirdInit = true
     } 
 })
     
 
 
 // Переход обратно на 1 уровень
-scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
+scene.onOverlapTile(SpriteKind.Player, assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
     if (room = 2) {
         tiles.setCurrentTilemap(tilemap`уровень1`)
         mySprite.setPosition(32, mySprite.y)
         room = 1
-        mySprite2.destroy()
+        cubird.destroy()
     }  
 })
       
@@ -382,4 +374,36 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
                 projectile.setPosition(mySprite.x, mySprite.y)
             }
         }
+})
+
+game.onUpdate(function() {
+    isBottom = mySprite.isHittingTile(CollisionDirection.Bottom)
+    if (isBottom) {
+       
+        if (controller.A.isPressed()) {
+            mySprite.vy = -55
+        }
+        animation.stopAnimation(animation.AnimationTypes.All, mySprite)
+    }
+
+    // Должны проверить инициализацию противников
+    // .. и запустить проверки сталкновения если "да"
+    if (isCubirdInit) {
+        if (cubird.vx > 0) {
+            if (isRightCubird == false) {   
+                cubirdImg.flipX()
+            }
+            isRightCubird = true
+        } else {
+            if (isRightCubird == true) {
+                cubirdImg.flipX()
+            }
+            isRightCubird = false
+        } 
+        
+        // Здесь урон
+        if (mySprite.overlapsWith(cubird)) {
+            info.changeLifeBy(-1)
+        }
+    }
 })
