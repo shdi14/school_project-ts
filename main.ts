@@ -1,6 +1,6 @@
 //Spawn mySprite
 info.setLife(5)
-let mySprite =sprites.create(assets.image`gg0`, SpriteKind.Player)
+let mySprite = sprites.create(assets.image`gg0`, SpriteKind.Player)
 let mySprite2: Sprite
 controller.moveSprite(mySprite, 55, 0)
 scene.cameraFollowSprite(mySprite)
@@ -13,6 +13,7 @@ let isRightcubird = true
 let acceleration = 26
 mySprite.ay = acceleration
 let timer1 = 0
+let timer2 = 0
 let isHealing = false
 let isBottom = true
 let isRight = true
@@ -238,8 +239,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
     animation.runImageAnimation(mySprite, flyAnimation, 300, true)
     mySprite.vy = 0
 })
+
 //переход между комнатами
-scene.onOverlapTile(SpriteKind.Player, img`
+scene.onOverlapTile(SpriteKind.Player,
+    img`
     1 1 1 1 . . . . . . . . . . . .
     1 1 1 1 . . . . . . . . . . . .
     1 1 1 1 . . . . . . . . . . . .
@@ -257,83 +260,52 @@ scene.onOverlapTile(SpriteKind.Player, img`
     1 1 1 1 . . . . . . . . . . . .
     1 1 1 1 . . . . . . . . . . . .
 `, function (sprite: Sprite, location: tiles.Location) {
-
-    if (room = 1) {
-
-    }
-    tiles.setCurrentTilemap(tilemap`уровень2`)
-    room = 2
-    mySprite.setPosition(28*16, mySprite.y+9*16)
-    mySprite2 = sprites.create(assets.image`reb`, SpriteKind.Player)
-    mySprite2.setPosition(16 * 10, 16 * 20 - 8)
-    
+    if (room == 1) {
+        tiles.setCurrentTilemap(tilemap`уровень2`)
+        room = 2
+        mySprite.setPosition(28*16, mySprite.y)
+        mySprite2 = sprites.create(assets.image`reb`, SpriteKind.Enemy)
+        mySprite2.setPosition(16 * 10, 16 * 20 - 8)
+        mySprite2.follow(mySprite, 20, 1000)
+    } 
 })
-//Падение
-game.onUpdateInterval(40, function () {
-
     
 
-//враг 1
-})
-game.onUpdateInterval(500, function() {
-    if (room !== 1) {
-        
-        
-        if (mySprite2.x !== 16 * 8 - 8 || mySprite2.x !== 16 * 11 - 8 ) {
-                
-                
-            isRightcubird = true
-            } else {
-            isRightcubird = false  
-            }      
-    
-}
 
-
+// Переход обратно на 1 уровень
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage0`, function (sprite: Sprite, location: tiles.Location) {
-
     if (room = 2) {
-tiles.setCurrentTilemap(tilemap`уровень1`)
-        mySprite.setPosition(32, mySprite.y-16*9)
-    }
-    
+        tiles.setCurrentTilemap(tilemap`уровень1`)
+        mySprite.setPosition(32, mySprite.y)
+        room = 1
+        mySprite2.destroy()
+    }  
 })
-
-
-        
-        
-//шип     
-   scene.onOverlapTile(SpriteKind.Player,assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
-    
+      
+//Шип     
+scene.onOverlapTile(SpriteKind.Player, assets.image`myImage1`, function(sprite: Sprite, location: tiles.Location) {
     if (timer1 = 1) {
         info.changeLifeBy(-1)
         timer1 = 2
-        timer.throttle("action", 10, function() {
-         timer1 = 1 
-           mySprite.y = mySprite.y - 16
-
-
+        timer.throttle("action", 100, function() {
+            timer1 = 1 
+            mySprite.y = mySprite.y - 16
         })
     }
-    
-    
-    })
+})
+
 //пила
 scene.onOverlapTile(SpriteKind.Player,assets.image`myImage`, function (sprite: Sprite, location: tiles.Location) {
-
-    if (timer1 = 1) {
+    if (timer2 = 1) {
         info.changeLifeBy(-1)
-        timer1 = 2
-        timer.throttle("action", 10, function () {
-            timer1 = 1
-            mySprite.y = mySprite.y -8
-
-
+        timer2 = 2
+        timer.throttle("action", 100, function () {
+            timer2 = 1
+            mySprite.y = mySprite.y - 8
         })
     }
-
-
 })
+
 //heal
 function heal() {
     if (isHealing == false) {
@@ -341,11 +313,13 @@ function heal() {
         mySprite.startEffect(effects.fire)
         mySprite.ay = 0
         mySprite.vy = 0
+        controller.moveSprite(mySprite, 0, 0)
         timer.after(1000, function () {
             info.changeLifeBy(3)
             effects.clearParticles(mySprite)
             timer.after(1000, function () {
                 mySprite.ay = acceleration
+                controller.moveSprite(mySprite, 55, 0)
                 isHealing = false
                 music.stopAllSounds()
             })
@@ -353,66 +327,59 @@ function heal() {
     }
     
 }
+
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {    
     heal()
 })
+
 //монета
-scene.onOverlapTile(SpriteKind.Player,assets.image`myImage3`, function(sprite: Sprite, location: tiles.Location) {
-    
+scene.onOverlapTile(SpriteKind.Player, assets.image`myImage3`, function(sprite: Sprite, location: tiles.Location) {
     game.gameOver(true)
 })
+
 //бомбы
-controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
-
-
- 
-if (isHealing == false) {
-    if (isRight == true) {
-        let projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . 4 . . . . . . .
-        . . . . . . . 4 2 4 . . . . . .
-        . . . . . . . . 4 d . . . . . .
-        . . . . . . . . . d . . . . . .
-        . . . . . . . f f f f f . . . .
-        . . . . . . f f f f f f f . . .
-        . . . . . f f f f f f f f f . .
-        . . . . . f f f f f f f f f . .
-        . . . . . f f f f f f f f f . .
-        . . . . . f f f f f f f f f . .
-        . . . . . f f f f f f f f f . .
-        . . . . . . f f f f f f f . . .
-        . . . . . . . f f f f f . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-    `, null, 50, 50)
-
-        projectile.setPosition(mySprite.x, mySprite.y)
-
-
-    } else {
-        let projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . . . . . . . . .
-        . . . . . . . 4 . . . . . . . .
-        . . . . . . 4 2 4 . . . . . . .
-        . . . . . . d 4 . . . . . . . .
-        . . . . . . d . . . . . . . . .
-        . . . . f f f f f . . . . . . .
-        . . . f f f f f f f . . . . . .
-        . . f f f f f f f f f . . . . .
-        . . f f f f f f f f f . . . . .
-        . . f f f f f f f f f . . . . .
-        . . f f f f f f f f f . . . . .
-        . . f f f f f f f f f . . . . .
-        . . . f f f f f f f . . . . . .
-        . . . . f f f f f . . . . . . .
-        . . . . . . . . . . . . . . . .
-        . . . . . . . . . . . . . . . .
-    `, null, -50, 50)
-        projectile.setPosition(mySprite.x, mySprite.y)
-
-
-    }
-}
-
-})})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function() { 
+        if (isHealing == false) {
+            if (isRight == true) {
+                let projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . 4 . . . . . . .
+                    . . . . . . . 4 2 4 . . . . . .
+                    . . . . . . . . 4 d . . . . . .
+                    . . . . . . . . . d . . . . . .
+                    . . . . . . . f f f f f . . . .
+                    . . . . . . f f f f f f f . . .
+                    . . . . . f f f f f f f f f . .
+                    . . . . . f f f f f f f f f . .
+                    . . . . . f f f f f f f f f . .
+                    . . . . . f f f f f f f f f . .
+                    . . . . . f f f f f f f f f . .
+                    . . . . . . f f f f f f f . . .
+                    . . . . . . . f f f f f . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                `, null, 50, 50)
+                projectile.setPosition(mySprite.x, mySprite.y)
+            } else {
+                let projectile = sprites.createProjectileFromSprite(img`
+                . . . . . . . . . . . . . . . .
+                . . . . . . . 4 . . . . . . . .
+                . . . . . . 4 2 4 . . . . . . .
+                . . . . . . d 4 . . . . . . . .
+                . . . . . . d . . . . . . . . .
+                . . . . f f f f f . . . . . . .
+                . . . f f f f f f f . . . . . .
+                . . f f f f f f f f f . . . . .
+                . . f f f f f f f f f . . . . .
+                . . f f f f f f f f f . . . . .
+                . . f f f f f f f f f . . . . .
+                . . f f f f f f f f f . . . . .
+                . . . f f f f f f f . . . . . .
+                . . . . f f f f f . . . . . . .
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . . . . . . .
+            `, null, -50, 50)
+                projectile.setPosition(mySprite.x, mySprite.y)
+            }
+        }
+})
