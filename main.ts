@@ -16,6 +16,7 @@ let room = 1
 let acceleration = 26
 mySprite.ay = acceleration
 let timer1 = 0
+let hp_cubird = 1
 let timer2 = 0
 let isHealing = false
 let isBottom = true
@@ -257,6 +258,7 @@ scene.onOverlapTile(SpriteKind.Player,
         room = 2
         mySprite.setPosition(28*16, mySprite.y)
         cubird = sprites.create(cubirdImg, SpriteKind.Enemy)
+        hp_cubird = 8
         cubird.setPosition(16 * 10, 16 * 20 - 8)
         cubird.follow(mySprite, 20, 1000)
         isCubirdInit = true
@@ -413,8 +415,11 @@ game.onUpdate(function() {
                 mySprite.x = mySprite.x - 8
             }
         }
-        if (mySprite.overlapsWith(normbomb)) {
-           
+        if (cubird.overlapsWith(normbomb)) {
+        hp_cubird = hp_cubird - 5
+        if (hp_cubird <= 0 ) {
+            sprites.destroy(cubird)
+        }  
         }
     }
 
