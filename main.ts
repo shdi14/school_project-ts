@@ -314,7 +314,7 @@ function heal() {
         timer.after(1000, function () {
             info.changeLifeBy(3)
             hp_gg = info.life()
-            if (hp_gg == 5) {
+            if (hp_gg >= 5) {
                 info.setLife(5)
             }
             effects.clearParticles(mySprite)
