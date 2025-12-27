@@ -404,6 +404,13 @@ game.onUpdate(function() {
         // Здесь урон
         if (mySprite.overlapsWith(cubird)) {
             info.changeLifeBy(-1)
+            if(isRightCubird == true) {
+                mySprite.x = mySprite.x + 8
+            }
+            
+            if (isRightCubird == false) {
+                mySprite.x = mySprite.x - 8
+            }
         }
     }
 })
