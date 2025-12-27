@@ -417,6 +417,7 @@ game.onUpdate(function() {
         }
         if (cubird.overlapsWith(normbomb)) {
         hp_cubird = hp_cubird - 5
+            sprites.destroy(normbomb)
         if (hp_cubird <= 0 ) {
             sprites.destroy(cubird)
         }  
