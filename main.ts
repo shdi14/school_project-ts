@@ -18,7 +18,9 @@ mySprite.ay = acceleration
 let timer1 = 0
 let hp_cubird = 1
 let timer2 = 0
+let hp_gg = 5
 let isHealing = false
+let cool_down_norm_bomb = false
 let isBottom = true
 let isRight = true
 let acseleration = 0
@@ -311,6 +313,7 @@ function heal() {
         controller.moveSprite(mySprite, 0, 0)
         timer.after(1000, function () {
             info.changeLifeBy(3)
+            hp_gg = info.life()
             effects.clearParticles(mySprite)
             timer.after(1000, function () {
                 mySprite.ay = acceleration
@@ -335,8 +338,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.image`myImage3`, function(sprite: 
 //бомбы
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() { 
         if (isHealing == false) {
-            if (isRight == true) {
-                normbomb = sprites.createProjectileFromSprite(img`
+            
+            
+            if (cool_down_norm_bomb == false) {
+                if (isRight == true) {
+                    normbomb = sprites.createProjectileFromSprite(img`
                     . . . . . . . . . . . . . . . .
                     . . . . . . . . 4 . . . . . . .
                     . . . . . . . 4 2 4 . . . . . .
@@ -354,9 +360,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
                     . . . . . . . . . . . . . . . .
                     . . . . . . . . . . . . . . . .
                 `, null, 50, 50)
-                normbomb.setPosition(mySprite.x, mySprite.y)
-            } else {
-                normbomb = sprites.createProjectileFromSprite(img`
+                    normbomb.setPosition(mySprite.x, mySprite.y)
+                } else {
+                    normbomb = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . .
                 . . . . . . . 4 . . . . . . . .
                 . . . . . . 4 2 4 . . . . . . .
@@ -374,8 +380,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
                 . . . . . . . . . . . . . . . .
                 . . . . . . . . . . . . . . . .
             `, null, -50, 50)
-                normbomb.setPosition(mySprite.x, mySprite.y)
+                    normbomb.setPosition(mySprite.x, mySprite.y)
+                }
+                cool_down_norm_bomb = true 
             }
+            timer.throttle("action", 2000, function () {
+                cool_down_norm_bomb = false
+            })
+            
+            
         }
 })
 
