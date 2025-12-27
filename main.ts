@@ -11,6 +11,7 @@ let midX = scene.screenWidth() / 2
 let midY = scene.screenHeight() / 2 
 let X = midX
 let Y = midY
+let normbomb: Sprite
 let room = 1
 let acceleration = 26
 mySprite.ay = acceleration
@@ -333,7 +334,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.image`myImage3`, function(sprite: 
 controller.A.onEvent(ControllerButtonEvent.Pressed, function() { 
         if (isHealing == false) {
             if (isRight == true) {
-                let projectile = sprites.createProjectileFromSprite(img`
+                normbomb = sprites.createProjectileFromSprite(img`
                     . . . . . . . . . . . . . . . .
                     . . . . . . . . 4 . . . . . . .
                     . . . . . . . 4 2 4 . . . . . .
@@ -351,9 +352,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
                     . . . . . . . . . . . . . . . .
                     . . . . . . . . . . . . . . . .
                 `, null, 50, 50)
-                projectile.setPosition(mySprite.x, mySprite.y)
+                normbomb.setPosition(mySprite.x, mySprite.y)
             } else {
-                let projectile = sprites.createProjectileFromSprite(img`
+                normbomb = sprites.createProjectileFromSprite(img`
                 . . . . . . . . . . . . . . . .
                 . . . . . . . 4 . . . . . . . .
                 . . . . . . 4 2 4 . . . . . . .
@@ -371,7 +372,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
                 . . . . . . . . . . . . . . . .
                 . . . . . . . . . . . . . . . .
             `, null, -50, 50)
-                projectile.setPosition(mySprite.x, mySprite.y)
+                normbomb.setPosition(mySprite.x, mySprite.y)
             }
         }
 })
@@ -401,7 +402,7 @@ game.onUpdate(function() {
             isRightCubird = false
         } 
         
-        // Здесь урон
+        // Здесь урон от кубёрда
         if (mySprite.overlapsWith(cubird)) {
             info.changeLifeBy(-1)
             if(isRightCubird == true) {
@@ -412,5 +413,9 @@ game.onUpdate(function() {
                 mySprite.x = mySprite.x - 8
             }
         }
+        if (mySprite.overlapsWith(normbomb)) {
+           
+        }
     }
+
 })
